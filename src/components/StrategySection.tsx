@@ -12,7 +12,7 @@ const cards = [
     icon: "💡",
     title: "Our Purpose",
     description:
-      "At Li & Zhou, value has tangible meaning and we strive to deliver value to our stakeholders with each and every interaction. We live by our values of humility, entrepreneurship and family.",
+      "At LianZhou, value is tangible, and we aim to create it for our stakeholders in every interaction—guided by humility, entrepreneurship, and a strong sense of family.",
   },
 ];
 
