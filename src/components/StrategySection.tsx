@@ -31,8 +31,7 @@ const StrategySection = () => {
             Our Strategy
           </h2>
           <p className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-foreground max-w-4xl text-balance">
-            Our vision is simple but bold – we aspire to create the supply chain
-            of the future to help our customers navigate the digital economy.
+            Our vision is clear and ambitious: to build next-generation supply chains that help our customers succeed in the digital economy.
           </p>
         </motion.div>
 
