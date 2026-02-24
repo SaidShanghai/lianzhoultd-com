@@ -1,7 +1,7 @@
 const footerLinks = [
   {
     title: "Company",
-    links: ["About Li & Fung", "Our Purpose", "Leadership", "Careers"],
+    links: ["About Li & Zhou", "Our Purpose", "Leadership", "Careers"],
   },
   {
     title: "Services",
@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div>
             <span className="text-2xl font-bold tracking-tight text-primary">
-              LI & FUNG
+              LI & ZHOU
             </span>
             <p className="mt-4 text-sm opacity-60 leading-relaxed">
               Creating the supply chain of the future for brands and retailers worldwide.
@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
         <div className="border-t border-background/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs opacity-40">
-            © 2024 Li & Fung Limited. All rights reserved.
+            © 2024 Li & Zhou Limited. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-xs opacity-40 hover:opacity-100 transition-opacity">

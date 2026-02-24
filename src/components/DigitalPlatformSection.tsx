@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const stats = [
   { value: "40", label: "weeks", subtitle: "Average calendar" },
-  { value: "21", label: "weeks", subtitle: "With Li & Fung digital apps" },
+  { value: "21", label: "weeks", subtitle: "With Li & Zhou digital apps" },
 ];
 
 const DigitalPlatformSection = () => {
