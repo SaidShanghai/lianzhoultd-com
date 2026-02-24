@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div>
             <span className="text-2xl font-bold tracking-tight text-primary">
-              LIANZHOU LTD
+              LIANZHOU
             </span>
             <p className="mt-4 text-sm opacity-60 leading-relaxed">
               Creating the supply chain of the future for brands and retailers worldwide.
