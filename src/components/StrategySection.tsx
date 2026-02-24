@@ -6,7 +6,7 @@ const cards = [
     icon: "🌱",
     title: "ESG Strategy",
     description:
-      "We responsibly manage our environmental, social and governance performance and work with our customers, suppliers and industry partners to further the sustainability of supply chains.",
+      "We responsibly manage our environmental, social and governance performance, working with customers, suppliers, and industry partners to strengthen supply chain sustainability.",
   },
   {
     icon: "💡",
