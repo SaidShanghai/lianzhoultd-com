@@ -23,7 +23,7 @@ const SupplyChainSection = () => {
             Supply Chain Innovation
           </h2>
           <p className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-foreground max-w-4xl text-balance">
-            We convene the global supply chain creating customized, end-to-end
+            We bring the global supply chain together to deliver customized, end-to-end
             solutions for brands and retailers.
           </p>
         </motion.div>
