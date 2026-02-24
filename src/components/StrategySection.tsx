@@ -12,7 +12,7 @@ const cards = [
     icon: "💡",
     title: "Our Purpose",
     description:
-      "At Li & Fung, value has tangible meaning and we strive to deliver value to our stakeholders with each and every interaction. We live by our values of humility, entrepreneurship and family.",
+      "At Li & Zhou, value has tangible meaning and we strive to deliver value to our stakeholders with each and every interaction. We live by our values of humility, entrepreneurship and family.",
   },
 ];
 
