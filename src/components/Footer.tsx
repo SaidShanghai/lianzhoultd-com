@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
         <div className="border-t border-background/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs opacity-40">
-            © 2024 Li & Zhou Limited. All rights reserved.
+            © 2024 LianZhou Ltd. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-xs opacity-40 hover:opacity-100 transition-opacity">
