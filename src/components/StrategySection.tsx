@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const cards = [
   {
@@ -7,12 +8,14 @@ const cards = [
     title: "ESG Strategy",
     description:
       "We responsibly manage our environmental, social and governance performance, working with customers, suppliers, and industry partners to strengthen supply chain sustainability.",
+    link: "/esg",
   },
   {
     icon: "💡",
     title: "Our Purpose",
     description:
       "At LianZhou, value is tangible, and we aim to create it for our stakeholders in every interaction—guided by humility, entrepreneurship, and a strong sense of family.",
+    link: "/purpose",
   },
 ];
 
