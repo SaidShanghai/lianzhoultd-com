@@ -40,25 +40,26 @@ const StrategySection = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {cards.map((card, i) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="group border border-border p-8 md:p-10 hover:border-primary transition-colors duration-300 cursor-pointer"
-            >
-              <span className="text-4xl mb-6 block">{card.icon}</span>
-              <h3 className="text-xl font-semibold text-foreground mb-4">
-                {card.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                {card.description}
-              </p>
-              <span className="inline-flex items-center gap-2 text-primary text-sm font-medium group-hover:gap-3 transition-all">
-                Find out more <ArrowRight className="w-4 h-4" />
-              </span>
-            </motion.div>
+            <Link to={card.link} key={card.title}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+                className="group border border-border p-8 md:p-10 hover:border-primary transition-colors duration-300 cursor-pointer h-full"
+              >
+                <span className="text-4xl mb-6 block">{card.icon}</span>
+                <h3 className="text-xl font-semibold text-foreground mb-4">
+                  {card.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  {card.description}
+                </p>
+                <span className="inline-flex items-center gap-2 text-primary text-sm font-medium group-hover:gap-3 transition-all">
+                  Find out more <ArrowRight className="w-4 h-4" />
+                </span>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
