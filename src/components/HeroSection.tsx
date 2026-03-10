@@ -1,30 +1,45 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect } from "react";
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handleTimeUpdate = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    // When playing forward and near the end, reverse
-    if (video.playbackRate > 0 && video.currentTime >= video.duration - 0.3) {
-      video.playbackRate = -1;
-    }
-    // When playing backward and near the start, go forward
-    if (video.playbackRate < 0 && video.currentTime <= 0.3) {
-      video.playbackRate = 1;
-    }
-  }, []);
+  const directionRef = useRef<"forward" | "backward">("forward");
+  const rafRef = useRef<number>(0);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video) {
-      video.addEventListener("timeupdate", handleTimeUpdate);
-      return () => video.removeEventListener("timeupdate", handleTimeUpdate);
-    }
-  }, [handleTimeUpdate]);
+    if (!video) return;
+
+    const step = 1 / 30; // ~30fps seek speed
+
+    const onEnded = () => {
+      // Video finished playing forward, now seek backward
+      video.pause();
+      directionRef.current = "backward";
+      seekBackward();
+    };
+
+    const seekBackward = () => {
+      if (!video) return;
+      if (video.currentTime <= 0.05) {
+        // Reached the start, play forward again
+        directionRef.current = "forward";
+        video.currentTime = 0;
+        video.play();
+        return;
+      }
+      video.currentTime = Math.max(0, video.currentTime - step);
+      rafRef.current = requestAnimationFrame(seekBackward);
+    };
+
+    video.addEventListener("ended", onEnded);
+
+    return () => {
+      video.removeEventListener("ended", onEnded);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
