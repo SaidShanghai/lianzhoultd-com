@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const leaders = [
   { name: "Said", role: "Chief Executive Officer", bio: "25+ years in global supply chain management. Previously led Asia-Pacific operations for a Fortune 500 retailer." },
   { name: "Marie Lin", role: "Chief Operating Officer", bio: "Expert in supply chain transformation and digital operations. Oversaw the integration of AI across LianZhou's platform." },
-  { name: "Michael Wong", role: "Chief Financial Officer", bio: "Seasoned financial leader with deep expertise in international trade finance and strategic growth planning." },
+  { name: "Linda Zhang", role: "Chief Financial Officer", bio: "Seasoned financial leader with deep expertise in international trade finance and strategic growth planning." },
   { name: "Elena Rodriguez", role: "Chief Sustainability Officer", bio: "Pioneer in sustainable sourcing practices. Leads LianZhou's ESG strategy and carbon-neutral initiatives." },
   { name: "David Park", role: "Chief Technology Officer", bio: "Former tech executive who built and scaled enterprise SaaS platforms. Leads LianZhou's digital transformation." },
   { name: "Aisha Patel", role: "President, Global Sourcing", bio: "Manages relationships with 15,000+ suppliers across 40+ countries. 20 years of sourcing expertise." },
