@@ -8,7 +8,7 @@ const openings = [
   { title: "Sustainability Manager", location: "London", dept: "ESG" },
   { title: "Product Manager — Digital Platform", location: "Remote", dept: "Technology" },
   { title: "Regional Sourcing Director", location: "Ho Chi Minh City", dept: "Sourcing" },
-  { title: "Data Scientist", location: "Shaoxing", dept: "Technology" },
+  
 ];
 
 const perks = [
