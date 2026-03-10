@@ -1,49 +1,16 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
 
 const HeroSection = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [fading, setFading] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleTimeUpdate = () => {
-      if (!video.duration) return;
-      // Start fade 1s before end
-      if (video.currentTime >= video.duration - 1 && !fading) {
-        setFading(true);
-      }
-    };
-
-    const handleEnded = () => {
-      video.currentTime = 0;
-      video.play();
-      // Remove fade after a short delay
-      setTimeout(() => setFading(false), 600);
-    };
-
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    video.addEventListener("ended", handleEnded);
-
-    return () => {
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-      video.removeEventListener("ended", handleEnded);
-    };
-  }, [fading]);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video background */}
       <video
-        ref={videoRef}
         autoPlay
         muted
+        loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-        style={{ opacity: fading ? 0 : 1 }}
+        className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/videos/hero-video.mp4" type="video/mp4" />
       </video>
