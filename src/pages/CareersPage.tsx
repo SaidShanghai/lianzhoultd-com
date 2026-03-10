@@ -1,14 +1,14 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Mail } from "lucide-react";
 
 const openings = [
   { title: "Senior Supply Chain Analyst", location: "Shaoxing", dept: "Operations" },
   { title: "Full Stack Engineer", location: "Casablanca", dept: "Technology" },
-  
   { title: "Product Manager — Digital Platform", location: "Remote", dept: "Technology" },
   { title: "Regional Sourcing Director", location: "Yiwu", dept: "Sourcing" },
-  
 ];
 
 const perks = [
@@ -21,6 +21,8 @@ const perks = [
 ];
 
 const CareersPage = () => {
+  const [selectedJob, setSelectedJob] = useState<typeof openings[0] | null>(null);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
@@ -81,28 +83,67 @@ const CareersPage = () => {
           <h2 className="text-xs uppercase tracking-[0.3em] text-primary mb-12">Open Positions</h2>
           <div className="divide-y divide-border">
             {openings.map((o, i) => (
-              <a
-                href={`mailto:jobs@lianzhoultd.com?subject=Application — ${o.title} (${o.location})`}
+              <motion.div
                 key={o.title}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                onClick={() => setSelectedJob(o)}
+                className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 group cursor-pointer"
               >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 group cursor-pointer"
-                >
-                  <div>
-                    <h3 className="text-lg font-medium group-hover:text-primary transition-colors">{o.title}</h3>
-                    <p className="text-sm text-muted-foreground">{o.dept}</p>
-                  </div>
-                  <span className="text-sm text-muted-foreground">{o.location}</span>
-                </motion.div>
-              </a>
+                <div>
+                  <h3 className="text-lg font-medium group-hover:text-primary transition-colors">{o.title}</h3>
+                  <p className="text-sm text-muted-foreground">{o.dept}</p>
+                </div>
+                <span className="text-sm text-muted-foreground">{o.location}</span>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {selectedJob && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+            onClick={() => setSelectedJob(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-background border border-border p-8 md:p-10 max-w-lg w-full relative"
+            >
+              <button
+                onClick={() => setSelectedJob(null)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X size={20} />
+              </button>
+
+              <p className="text-xs uppercase tracking-[0.3em] text-primary mb-2">{selectedJob.dept} · {selectedJob.location}</p>
+              <h3 className="text-2xl font-light mb-4">{selectedJob.title}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Interested in this position? Send us your CV and a short introduction — we'd love to hear from you.
+              </p>
+
+              <a
+                href={`mailto:jobs@lianzhoultd.com?subject=Application — ${selectedJob.title} (${selectedJob.location})`}
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 text-sm uppercase tracking-widest hover:opacity-90 transition-opacity"
+              >
+                <Mail size={16} />
+                jobs@lianzhoultd.com
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
