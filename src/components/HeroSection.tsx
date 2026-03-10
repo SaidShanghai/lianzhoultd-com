@@ -1,45 +1,38 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const directionRef = useRef<"forward" | "backward">("forward");
-  const rafRef = useRef<number>(0);
+  const [fading, setFading] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const step = 1 / 30; // ~30fps seek speed
-
-    const onEnded = () => {
-      // Video finished playing forward, now seek backward
-      video.pause();
-      directionRef.current = "backward";
-      seekBackward();
-    };
-
-    const seekBackward = () => {
-      if (!video) return;
-      if (video.currentTime <= 0.05) {
-        // Reached the start, play forward again
-        directionRef.current = "forward";
-        video.currentTime = 0;
-        video.play();
-        return;
+    const handleTimeUpdate = () => {
+      if (!video.duration) return;
+      // Start fade 1s before end
+      if (video.currentTime >= video.duration - 1 && !fading) {
+        setFading(true);
       }
-      video.currentTime = Math.max(0, video.currentTime - step);
-      rafRef.current = requestAnimationFrame(seekBackward);
     };
 
-    video.addEventListener("ended", onEnded);
+    const handleEnded = () => {
+      video.currentTime = 0;
+      video.play();
+      // Remove fade after a short delay
+      setTimeout(() => setFading(false), 600);
+    };
+
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("ended", handleEnded);
 
     return () => {
-      video.removeEventListener("ended", onEnded);
-      cancelAnimationFrame(rafRef.current);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("ended", handleEnded);
     };
-  }, []);
+  }, [fading]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -49,7 +42,8 @@ const HeroSection = () => {
         autoPlay
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+        style={{ opacity: fading ? 0 : 1 }}
       >
         <source src="/videos/hero-video.mp4" type="video/mp4" />
       </video>
