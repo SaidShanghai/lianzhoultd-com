@@ -50,13 +50,13 @@ const Footer = () => {
               </h4>
               <ul className="space-y-3">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
+                  <li key={link.label}>
+                    <Link
+                      to={link.href}
                       className="text-sm opacity-70 hover:opacity-100 hover:text-primary transition-all"
                     >
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
