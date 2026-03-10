@@ -1,15 +1,32 @@
+import { Link } from "react-router-dom";
+
 const footerLinks = [
   {
     title: "Company",
-    links: ["About Lianzhou", "Our Purpose", "Leadership", "Careers"],
+    links: [
+      { label: "About Lianzhou", href: "/about" },
+      { label: "Our Purpose", href: "/purpose" },
+      { label: "Leadership", href: "/leadership" },
+      { label: "Careers", href: "/careers" },
+    ],
   },
   {
     title: "Services",
-    links: ["Supply Chain", "Logistics", "Digital Platform", "Sourcing"],
+    links: [
+      { label: "Supply Chain", href: "/#supply-chain" },
+      { label: "Logistics", href: "/logistics" },
+      { label: "Digital Platform", href: "/#digital" },
+      { label: "Sourcing", href: "/sourcing" },
+    ],
   },
   {
     title: "Resources",
-    links: ["ESG Report", "Newsroom", "Investor Relations", "Contact"],
+    links: [
+      { label: "ESG Report", href: "/esg" },
+      { label: "Newsroom", href: "/newsroom" },
+      { label: "Investor Relations", href: "/investor-relations" },
+      { label: "Contact", href: "/#contact" },
+    ],
   },
 ];
 
