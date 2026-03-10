@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const openings = [
   { title: "Senior Supply Chain Analyst", location: "Shaoxing", dept: "Operations" },
   { title: "Full Stack Engineer", location: "Singapore", dept: "Technology" },
-  { title: "Sustainability Manager", location: "London", dept: "ESG" },
+  
   { title: "Product Manager — Digital Platform", location: "Remote", dept: "Technology" },
   { title: "Regional Sourcing Director", location: "Yiwu", dept: "Sourcing" },
   
