@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
 const leaders = [
-  { name: "James Chen", role: "Chief Executive Officer", bio: "25+ years in global supply chain management. Previously led Asia-Pacific operations for a Fortune 500 retailer." },
+  { name: "Said", role: "Chief Executive Officer", bio: "25+ years in global supply chain management. Previously led Asia-Pacific operations for a Fortune 500 retailer." },
   { name: "Sarah Lin", role: "Chief Operating Officer", bio: "Expert in supply chain transformation and digital operations. Oversaw the integration of AI across LianZhou's platform." },
   { name: "Michael Wong", role: "Chief Financial Officer", bio: "Seasoned financial leader with deep expertise in international trade finance and strategic growth planning." },
   { name: "Elena Rodriguez", role: "Chief Sustainability Officer", bio: "Pioneer in sustainable sourcing practices. Leads LianZhou's ESG strategy and carbon-neutral initiatives." },
