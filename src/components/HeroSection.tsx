@@ -1,14 +1,38 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useRef, useEffect, useCallback } from "react";
 
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleTimeUpdate = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    // When playing forward and near the end, reverse
+    if (video.playbackRate > 0 && video.currentTime >= video.duration - 0.3) {
+      video.playbackRate = -1;
+    }
+    // When playing backward and near the start, go forward
+    if (video.playbackRate < 0 && video.currentTime <= 0.3) {
+      video.playbackRate = 1;
+    }
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.addEventListener("timeupdate", handleTimeUpdate);
+      return () => video.removeEventListener("timeupdate", handleTimeUpdate);
+    }
+  }, [handleTimeUpdate]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video background */}
       <video
+        ref={videoRef}
         autoPlay
         muted
-        loop
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
