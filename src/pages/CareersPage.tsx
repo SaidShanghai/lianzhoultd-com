@@ -81,20 +81,24 @@ const CareersPage = () => {
           <h2 className="text-xs uppercase tracking-[0.3em] text-primary mb-12">Open Positions</h2>
           <div className="divide-y divide-border">
             {openings.map((o, i) => (
-              <motion.div
+              <a
+                href={`mailto:jobs@lianzhoultd.com?subject=Application — ${o.title} (${o.location})`}
                 key={o.title}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 group cursor-pointer"
               >
-                <div>
-                  <h3 className="text-lg font-medium group-hover:text-primary transition-colors">{o.title}</h3>
-                  <p className="text-sm text-muted-foreground">{o.dept}</p>
-                </div>
-                <span className="text-sm text-muted-foreground">{o.location}</span>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 group cursor-pointer"
+                >
+                  <div>
+                    <h3 className="text-lg font-medium group-hover:text-primary transition-colors">{o.title}</h3>
+                    <p className="text-sm text-muted-foreground">{o.dept}</p>
+                  </div>
+                  <span className="text-sm text-muted-foreground">{o.location}</span>
+                </motion.div>
+              </a>
             ))}
           </div>
         </div>
