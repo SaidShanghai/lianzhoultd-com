@@ -8,7 +8,7 @@ const news = [
   { date: "Dec 2023", title: "Annual Sustainability Report Shows 45% Carbon Reduction", excerpt: "Exceeding our interim targets, we continue our journey toward net-zero emissions by 2030." },
   { date: "Nov 2023", title: "Partnership with Leading European Retailer for End-to-End Supply Chain", excerpt: "Multi-year agreement to manage sourcing, logistics, and digital integration for 2,000+ SKUs." },
   { date: "Oct 2023", title: "LianZhou Named Top Supply Chain Innovator by Industry Forum", excerpt: "Recognized for our digital-first approach and commitment to sustainable sourcing practices." },
-  { date: "Sep 2023", title: "Worker Well-being Program Reaches 500,000 Workers Milestone", excerpt: "Our investment in training, health, and fair wages continues to scale across supplier factories." },
+  
 ];
 
 const NewsroomPage = () => {
