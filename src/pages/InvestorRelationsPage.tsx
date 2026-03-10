@@ -72,7 +72,7 @@ const InvestorRelationsPage = () => {
                 <span className="font-medium text-foreground">Email:</span> ir@lianzhoultd.com
               </p>
               <p className="text-muted-foreground">
-                <span className="font-medium text-foreground">Phone:</span> +852 2300 2300
+                <span className="font-medium text-foreground">Phone:</span> +86 131 205 78200
               </p>
             </div>
           </div>
