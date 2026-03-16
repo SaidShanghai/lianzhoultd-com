@@ -67,14 +67,6 @@ const Footer = () => {
           <p className="text-xs opacity-40">
             © 2024 LianZhou Ltd. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-xs opacity-40 hover:opacity-100 transition-opacity">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-xs opacity-40 hover:opacity-100 transition-opacity">
-              Terms of Use
-            </a>
-          </div>
         </div>
       </div>
     </footer>
