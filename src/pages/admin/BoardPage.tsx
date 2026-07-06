@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { type CSSProperties, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 type Board = {
@@ -13,9 +13,20 @@ type Board = {
 
 const nf = (n: number | null) => n == null ? "—" : Math.round(n).toLocaleString("fr-FR");
 const fdate = (d: string | null) =>
-  d ? new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "2-digit" }) : "—";
+  d ? new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit" }) : "—";
 const norm = (s: unknown) =>
   String(s ?? "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+// Largeurs fixes par colonne (total ~1034px) — table en tableLayout:fixed
+const W = {
+  nom: 46, cde: 60, pi: 60, inv: 66, amount: 62, etd: 50, book: 50, ship: 50, doc: 38,
+  gmt: 44, vendor: 66, fact: 60, fterms: 52, dc: 56, due: 50, marge: 58, client: 54,
+  comment: 60, deposit: 52,
+};
+// Cellule compacte : ellipsis + nowrap + padding serré
+const cell: CSSProperties = { overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", padding: "5px 6px" };
+const cd = (w: number, extra?: CSSProperties): CSSProperties => ({ ...cell, width: w, ...extra });
+const thS = (w: number): CSSProperties => ({ width: w, padding: "6px 6px" });
 
 // Badge de statut client
 function ClientBadge({ v }: { v: string | null }) {
@@ -92,38 +103,51 @@ export default function BoardPage() {
             <p style={{ padding: 18, fontSize: 13, color: "var(--crm-text-2)" }}>Aucun résultat.</p>
           )}
           {!loading && !err && filtered.length > 0 && (
-            <div className="crm-table-wrap" style={{ overflowX: "auto" }}>
-              <table className="crm-table" style={{ minWidth: 1400 }}>
+            <div className="crm-table-wrap">
+              <table className="crm-table" style={{ width: "100%", tableLayout: "fixed", borderCollapse: "collapse", fontSize: 11 }}>
                 <thead><tr>
-                  <th>NOM</th><th>CDE</th><th>PI</th><th>INVOICE</th>
-                  <th className="crm-num">AMOUNT</th><th>ETD</th><th>BOOK</th><th>SHIPPED</th>
-                  <th>DOCS</th><th>GMT</th><th>VENDOR</th>
-                  <th className="crm-num">FACTORY</th><th>F.TERMS</th><th>DC N°</th>
-                  <th>DUE</th><th className="crm-num">MARGE</th>
-                  <th>CLIENT</th><th>COMMENT</th><th className="crm-num">DEPOSIT</th>
+                  <th style={thS(W.nom)}>NOM</th>
+                  <th style={thS(W.cde)}>CDE</th>
+                  <th style={thS(W.pi)}>PI</th>
+                  <th style={thS(W.inv)}>INVOICE</th>
+                  <th className="crm-num" style={thS(W.amount)}>AMOUNT</th>
+                  <th style={thS(W.etd)}>ETD</th>
+                  <th style={thS(W.book)}>BOOK</th>
+                  <th style={thS(W.ship)}>SHIPPED</th>
+                  <th style={thS(W.doc)}>DOCS</th>
+                  <th style={thS(W.gmt)}>GMT</th>
+                  <th style={thS(W.vendor)}>VENDOR</th>
+                  <th className="crm-num" style={thS(W.fact)}>FACTORY</th>
+                  <th style={thS(W.fterms)}>F.TERMS</th>
+                  <th style={thS(W.dc)}>DC N°</th>
+                  <th style={thS(W.due)}>DUE</th>
+                  <th className="crm-num" style={thS(W.marge)}>MARGE</th>
+                  <th style={thS(W.client)}>CLIENT</th>
+                  <th style={thS(W.comment)}>COMMENT</th>
+                  <th className="crm-num" style={thS(W.deposit)}>DEPOSIT</th>
                 </tr></thead>
                 <tbody>
                   {filtered.map((r) => (
                     <tr key={r.id}>
-                      <td>{r.nom || "—"}</td>
-                      <td style={{ maxWidth: 120, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={r.cde || ""}>{r.cde || "—"}</td>
-                      <td>{r.pi || "—"}</td>
-                      <td style={{ fontWeight: 600 }}>{r.invoice_number}</td>
-                      <td className="crm-num">{nf(r.amount)} $</td>
-                      <td>{fdate(r.etd)}</td>
-                      <td>{fdate(r.book)}</td>
-                      <td>{fdate(r.shipped)}</td>
-                      <td>{r.docs_sent ? <span className="crm-badge ok">{r.docs_sent}</span> : "—"}</td>
-                      <td>{r.gmt_terms || "—"}</td>
-                      <td>{r.vendor || "—"}</td>
-                      <td className="crm-num" style={{ color: "var(--crm-text-2)" }}>{nf(r.factory_inv)} $</td>
-                      <td>{r.factory_terms || "—"}</td>
-                      <td style={{ maxWidth: 110, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={r.dc_number || ""}>{r.dc_number || "—"}</td>
-                      <td>{fdate(r.due_date)}</td>
-                      <td className="crm-num" style={{ color: "var(--crm-mint)", fontWeight: 600 }}>{nf(r.marge)} $</td>
-                      <td><ClientBadge v={r.client_paid} /></td>
-                      <td style={{ fontSize: 12, color: "var(--crm-text-2)" }}>{r.lianzhou_comment || "—"}</td>
-                      <td className="crm-num" style={{ color: r.deposit_amount && r.deposit_amount < 0 ? "var(--crm-red)" : "var(--crm-text-2)" }}>
+                      <td style={cd(W.nom)} title={r.nom ?? ""}>{r.nom || "—"}</td>
+                      <td style={cd(W.cde)} title={r.cde ?? ""}>{r.cde || "—"}</td>
+                      <td style={cd(W.pi)} title={r.pi ?? ""}>{r.pi || "—"}</td>
+                      <td style={cd(W.inv, { fontWeight: 600 })} title={r.invoice_number}>{r.invoice_number}</td>
+                      <td className="crm-num" style={cd(W.amount)} title={r.amount != null ? String(r.amount) : ""}>{nf(r.amount)} $</td>
+                      <td style={cd(W.etd)} title={r.etd ?? ""}>{fdate(r.etd)}</td>
+                      <td style={cd(W.book)} title={r.book ?? ""}>{fdate(r.book)}</td>
+                      <td style={cd(W.ship)} title={r.shipped ?? ""}>{fdate(r.shipped)}</td>
+                      <td style={cd(W.doc, { textAlign: "center", color: r.docs_sent ? "var(--crm-mint)" : "var(--crm-text-3)" })} title={r.docs_sent ?? ""}>{r.docs_sent ? "✓" : "—"}</td>
+                      <td style={cd(W.gmt)} title={r.gmt_terms ?? ""}>{r.gmt_terms || "—"}</td>
+                      <td style={cd(W.vendor)} title={r.vendor ?? ""}>{r.vendor || "—"}</td>
+                      <td className="crm-num" style={cd(W.fact, { color: "var(--crm-text-2)" })} title={r.factory_inv != null ? String(r.factory_inv) : ""}>{nf(r.factory_inv)} $</td>
+                      <td style={cd(W.fterms)} title={r.factory_terms ?? ""}>{r.factory_terms || "—"}</td>
+                      <td style={cd(W.dc)} title={r.dc_number ?? ""}>{r.dc_number || "—"}</td>
+                      <td style={cd(W.due)} title={r.due_date ?? ""}>{fdate(r.due_date)}</td>
+                      <td className="crm-num" style={cd(W.marge, { color: "var(--crm-mint)", fontWeight: 600 })} title={r.marge != null ? String(r.marge) : ""}>{nf(r.marge)} $</td>
+                      <td style={cd(W.client)} title={r.client_paid ?? ""}><ClientBadge v={r.client_paid} /></td>
+                      <td style={cd(W.comment, { color: "var(--crm-text-2)" })} title={r.lianzhou_comment ?? ""}>{r.lianzhou_comment || "—"}</td>
+                      <td className="crm-num" style={cd(W.deposit, { color: r.deposit_amount && r.deposit_amount < 0 ? "var(--crm-red)" : "var(--crm-text-2)" })} title={r.deposit_amount != null ? String(r.deposit_amount) : ""}>
                         {r.deposit_amount != null ? nf(r.deposit_amount) + " $" : "—"}
                       </td>
                     </tr>
