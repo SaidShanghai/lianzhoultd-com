@@ -14,6 +14,9 @@ import SourcingPage from "./pages/SourcingPage";
 import ESGPage from "./pages/ESGPage";
 import NewsroomPage from "./pages/NewsroomPage";
 import InvestorRelationsPage from "./pages/InvestorRelationsPage";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import CrmDashboard from "@/pages/admin/CrmDashboard";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +25,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -34,10 +38,12 @@ const App = () => (
           <Route path="/esg" element={<ESGPage />} />
           <Route path="/newsroom" element={<NewsroomPage />} />
           <Route path="/investor-relations" element={<InvestorRelationsPage />} />
+          <Route path="/admin/crm" element={<ProtectedRoute><CrmDashboard /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

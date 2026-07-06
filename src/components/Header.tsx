@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { signInWithGoogle } from "@/contexts/AuthContext";
 
 const navLinks = [
   { label: "Our Strategy", href: "#strategy" },
@@ -54,19 +55,35 @@ const Header = () => {
             className="fixed inset-0 z-40 bg-primary flex items-center justify-center"
           >
             <nav className="flex flex-col items-center gap-8">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-3xl md:text-5xl font-light text-primary-foreground hover:opacity-70 transition-opacity"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {navLinks.map((link, i) =>
+                link.label === "Digital Platform" ? (
+                  <motion.button
+                    key={link.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      signInWithGoogle();
+                    }}
+                    className="text-3xl md:text-5xl font-light text-primary-foreground hover:opacity-70 transition-opacity"
+                  >
+                    {link.label}
+                  </motion.button>
+                ) : (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-3xl md:text-5xl font-light text-primary-foreground hover:opacity-70 transition-opacity"
+                  >
+                    {link.label}
+                  </motion.a>
+                )
+              )}
             </nav>
           </motion.div>
         )}
