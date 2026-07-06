@@ -16,7 +16,9 @@ import NewsroomPage from "./pages/NewsroomPage";
 import InvestorRelationsPage from "./pages/InvestorRelationsPage";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import CrmDashboard from "@/pages/admin/CrmDashboard";
+import AdminLayout from "@/layout/AdminLayout";
+import Dashboard from "@/pages/admin/Dashboard";
+import Placeholder from "@/pages/admin/Placeholder";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +40,15 @@ const App = () => (
           <Route path="/esg" element={<ESGPage />} />
           <Route path="/newsroom" element={<NewsroomPage />} />
           <Route path="/investor-relations" element={<InvestorRelationsPage />} />
-          <Route path="/admin/crm" element={<ProtectedRoute><CrmDashboard /></ProtectedRoute>} />
+          <Route path="/admin/crm" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            <Route index element={<Dashboard />} />
+            <Route path="produits" element={<Placeholder title="Produits" subtitle="Catalogue produits — module suivant." />} />
+            <Route path="proformas" element={<Placeholder title="Proformas (PI)" subtitle="Émission de PI — à venir." />} />
+            <Route path="invoices" element={<Placeholder title="Invoices" subtitle="Gestion des factures — à venir." />} />
+            <Route path="tresorerie" element={<Placeholder title="Trésorerie" subtitle="Échéancier — à venir." />} />
+            <Route path="partenaires" element={<Placeholder title="Clients & fournisseurs" subtitle="Carnet d'adresses — à venir." />} />
+            <Route path="reglages" element={<Placeholder title="Réglages" subtitle="Équipe, taux de change — à venir." />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
