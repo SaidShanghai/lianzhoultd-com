@@ -16,6 +16,8 @@ const fdate = (d: string | null) =>
   d ? new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "2-digit" }) : "—";
 const norm = (s: unknown) =>
   String(s ?? "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+// Mapping d'AFFICHAGE seulement : la valeur en base reste "FINANCED"
+const displayClient = (v: string | null) => v === "FINANCED" ? "HSBC" : (v || "\u2014");
 
 // Largeurs fixes par colonne (total ~1034px) — table en tableLayout:fixed
 const W = {
@@ -41,7 +43,7 @@ const thS = (w: number): CSSProperties => ({
 function ClientBadge({ v }: { v: string | null }) {
   if (!v) return <span style={{ color: "var(--crm-text-3)" }}>—</span>;
   const cls = v === "PAID" ? "ok" : v === "FINANCED" ? "warn" : "info";
-  return <span className={`crm-badge ${cls}`}>{v}</span>;
+  return <span className={`crm-badge ${cls}`}>{displayClient(v)}</span>;
 }
 
 export default function BoardPage() {
@@ -67,7 +69,7 @@ export default function BoardPage() {
       const h = norm([
         r.nom, r.cde, r.pi, r.invoice_number, r.vendor,
         r.gmt_terms, r.factory_terms, r.dc_number,
-        r.client_paid, r.lianzhou_comment, r.docs_sent,
+        r.client_paid, displayClient(r.client_paid), r.lianzhou_comment, r.docs_sent,
         r.amount, r.factory_inv, r.marge,
       ].join(" "));
       return terms.every((t) => h.includes(t));
