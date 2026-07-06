@@ -19,6 +19,7 @@ const PILOTAGE = [
   { to: "/admin/crm/invoices", label: "Invoices", icon: "M6 2h12v20l-3-2-3 2-3-2-3 2z", key: "invoices" },
 ];
 const OPERATIONS = [
+  { to: "/admin/crm/board", label: "Board", icon: "M3 4h18v4H3zM3 10h18v4H3zM3 16h18v4H3z" },
   { to: "/admin/crm/tresorerie", label: "Trésorerie", icon: "M3 6h18v12H3zM3 10h18M7 14h4" },
   { to: "/admin/crm/partenaires", label: "Partenaires", icon: "M9 11a4 4 0 100-8 4 4 0 000 8zM3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M17 11a3 3 0 100-6" },
 ];

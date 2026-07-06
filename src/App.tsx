@@ -18,6 +18,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AdminLayout from "@/layout/AdminLayout";
 import Dashboard from "@/pages/admin/Dashboard";
+import BoardPage from "@/pages/admin/BoardPage";
 import Placeholder from "@/pages/admin/Placeholder";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/investor-relations" element={<InvestorRelationsPage />} />
           <Route path="/admin/crm" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />
+            <Route path="board" element={<BoardPage />} />
             <Route path="produits" element={<Placeholder title="Produits" subtitle="Catalogue produits — module suivant." />} />
             <Route path="proformas" element={<Placeholder title="Proformas (PI)" subtitle="Émission de PI — à venir." />} />
             <Route path="invoices" element={<Placeholder title="Invoices" subtitle="Gestion des factures — à venir." />} />
