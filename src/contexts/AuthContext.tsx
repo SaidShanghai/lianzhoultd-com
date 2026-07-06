@@ -22,10 +22,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export const useAuth = () => useContext(AuthCtx);
 
 export async function signInWithGoogle() {
-  await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: { redirectTo: window.location.origin + "/admin/crm" },
   });
+  if (error) {
+    console.error("signInWithGoogle error:", error);
+    alert("Erreur de connexion : " + error.message);
+  }
 }
 
 export async function signOut() {
