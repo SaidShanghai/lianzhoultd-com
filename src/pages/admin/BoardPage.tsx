@@ -55,7 +55,7 @@ export default function BoardPage() {
   useEffect(() => {
     (async () => {
       const { data, error } = await supabase.from("board").select("*")
-        .order("due_date", { ascending: true, nullsFirst: false });
+        .order("etd", { ascending: false, nullsFirst: false });
       if (error) setErr(error.message);
       else setRows((data ?? []) as Board[]);
       setLoading(false);
