@@ -26,7 +26,16 @@ const W = {
 // Cellule compacte : ellipsis + nowrap + padding serré
 const cell: CSSProperties = { overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", padding: "5px 6px" };
 const cd = (w: number, extra?: CSSProperties): CSSProperties => ({ ...cell, width: w, ...extra });
-const thS = (w: number): CSSProperties => ({ width: w, padding: "6px 6px" });
+const thS = (w: number): CSSProperties => ({
+  width: w,
+  padding: "6px 6px",
+  position: "sticky",
+  top: 0,
+  zIndex: 2,
+  background: "var(--crm-ivory)",   // fond opaque : masque les lignes qui défilent dessous
+  fontWeight: 700,
+  borderBottom: "2px solid var(--crm-border)",
+});
 
 // Badge de statut client
 function ClientBadge({ v }: { v: string | null }) {
@@ -103,7 +112,7 @@ export default function BoardPage() {
             <p style={{ padding: 18, fontSize: 13, color: "var(--crm-text-2)" }}>Aucun résultat.</p>
           )}
           {!loading && !err && filtered.length > 0 && (
-            <div className="crm-table-wrap">
+            <div className="crm-table-wrap" style={{ maxHeight: "calc(100vh - 320px)", overflowY: "auto", overflowX: "hidden" }}>
               <table className="crm-table" style={{ width: "100%", tableLayout: "fixed", borderCollapse: "collapse", fontSize: 11 }}>
                 <thead><tr>
                   <th style={thS(W.nom)}>NOM</th>
