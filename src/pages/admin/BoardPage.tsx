@@ -132,7 +132,7 @@ export default function BoardPage() {
                   <th style={thS(W.due)}>DUE</th>
                   <th className="crm-num" style={thS(W.marge)}>MARGE</th>
                   <th style={thS(W.client)}>CLIENT</th>
-                  <th style={thS(W.comment)}>COMMENT</th>
+                  <th style={thS(W.comment)}>SUPPLIER</th>
                   <th className="crm-num" style={thS(W.deposit)}>DEPOSIT</th>
                 </tr></thead>
                 <tbody>
